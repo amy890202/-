@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Spyder Editor
-
 This is a temporary script file.
 """
 import math
@@ -39,7 +38,7 @@ K = 40
 T = 2
 r = 0.08
 vol = 0.2
-print(blscall(S,K,T,r,vol))
+print('blscall:',blscall(S,K,T,r,vol))
 
 N=100
 M=1000
@@ -55,7 +54,7 @@ def calcall_plot(M,N,K):
             call += (Sa[-1]-K)
     plt.show()
     return call/M*math.exp(-r*T)
-print(calcall_plot(M,N,K))
+print('MCcall',calcall_plot(M,N,K))
 
 
 def calcall(M,N,K):
@@ -88,8 +87,7 @@ Ma = [10, 100,1000]
 
 for a in Na:
     for b in Ma:
-        print('N:',a)
-        print('M:',b)
+        print('N:',a,'M:',b)
         #tmp = calcall(b,a,K)
         print(calavgdef(b,a,K))#abs(tmp - blscall(S,K,T,r,vol))
 #%%
@@ -97,14 +95,12 @@ for a in Na:
 S = 19393.16
 r = 0.00825
 T = 10/252#一年252個交易日
-
+call =[655,585,499,434,372,306,248,199,156,117,86,60,41,28.5,20.5,14.5,10]
 Ka = np.arange(15800,17500,100)
 vola = np.zeros(len(Ka))
 for i in range(len(Ka)):
-    vola[i] = BisectioniBLS(S,Ka[i],T,r,calcall(M,N,Ka[i]))
+    vola[i] = BisectioniBLS(S,Ka[i],T,r,call[i])
     print('K:',Ka[i],'vol:', vola[i])
 plt.plot(Ka,vola)#測微笑曲線
 
     
-
-
