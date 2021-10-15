@@ -91,16 +91,14 @@ for a in Na:
         #tmp = calcall(b,a,K)
         print(calavgdef(b,a,K))#abs(tmp - blscall(S,K,T,r,vol))
 #%%
-#以台指選202110為例
-S = 16393.16
-r = 0.00825
-T = 10/252#一年252個交易日
-call =[655,585,499,434,372,306,248,199,156,117,86,60,41,28.5,20.5,14.5,10]
+        
+S = 16393.16 #加權股價指數
+r = 0.00825#台銀利率
+T = 10/252#life of option 一年252個交易日 兩周  (以年為單位)
+call =[655,585,499,434,372,306,248,199,156,117,86,60,41,28.5,20.5,14.5,10]#call price
 Ka = np.arange(15800,17500,100)
 vola = np.zeros(len(Ka))
 for i in range(len(Ka)):
     vola[i] = BisectioniBLS(S,Ka[i],T,r,call[i])
     print('K:',Ka[i],'vol:', vola[i],'call',call[i])
 plt.plot(Ka,vola)#測微笑曲線
-
-    
