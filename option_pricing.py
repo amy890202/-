@@ -22,6 +22,21 @@ def MCcall(S,K,T,r,vol,N):
         St[i+1] = St[i]*math.exp((r-0.5*vol*vol)*dt+vol*np.random.normal()*math.sqrt(dt))
     return St
 
+#可使用numpy矩陣運算一次算多筆來加速python直譯式程式
+# def MCcall(S,K,T,r,vol,N,M):
+#     dt = T/N
+#     St = np.zeros((M,N+1))
+#     St[:,1:N+1] = np.exp((r-0.5*vol*vol)*dt+vol*np.random.normal(size=(M,N))*math.sqrt(dt))
+#     St[:,0]=S
+#     St = np.cumprod(St,axis=1)
+#     call = np.mean(np.maximum(St[:,-1]-K,0))*math.exp(-r*T)
+#     return call,St
+# call,St = MCcall(S,K,T,r,vol,100,1000)
+# print(call)
+# plt.plot(St.T)
+
+
+
 def BisectioniBLS(S,K,T,r,call):#用bisection求vol
     left = 0.00000001
     right = 1
